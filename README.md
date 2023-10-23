@@ -4,7 +4,9 @@
 
 _Automated tests for [Pet Store](https://github.com/jurgenting/petStoreAPITest)_
 
+
 [![regression 💯 ](https://github.com/jurgenting/petStoreAPITest/actions/workflows/regression.yml/badge.svg)](https://github.com/jurgenting/petStoreAPITest/actions/workflows/regression.yml)
+
 
 </div>
 
