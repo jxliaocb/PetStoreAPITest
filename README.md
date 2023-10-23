@@ -4,8 +4,7 @@
 
 _Automated tests for [Pet Store](https://github.com/jurgenting/petStoreAPITest)_
 
-
-[![regression 💯 ](https://github.com/jurgenting/petStoreAPITest/actions/workflows/regression.yml/badge.svg)](https://github.com/jurgenting/petStoreAPITest/actions/workflows/regression.yml)
+[![regression  💯 ](https://github.com/jurgenting/petStoreAPITest/actions/workflows/regression.yml/badge.svg)](https://github.com/jurgenting/petStoreAPITest/actions/workflows/regression.yml)
 
 
 </div>
@@ -18,11 +17,18 @@ Automation framework for petStore.
 
 ### Install Node
 
+Version > 14
+
 ### Install dependencies
 
 ```shell
 npm install
 ```
+
+## Run Pet test in Github workflow (Recommended)
+
+Go to Github actions tab, choose 'regression' workflow, click 'Run workflow' button.
+![Alt Text](./Github%20action.png)
 
 ## Run Pet test in your local
 
@@ -30,10 +36,10 @@ npm install
 npm test -- --spec ./test/api/PetApi.spec.js
 ```
 
-## Run Pet test in Github workflow
+## Test report
 
-Go to Github actions tab, choose 'regression' workflow, click 'Run workflow' button.
-
+Find test report in Github artifact. Or in your local code repo's 'mochaawesome-report' folder if you ran you test locally.
+![Alt Text](./testReport.png)
 
 ## api_key
 
