@@ -1,0 +1,49 @@
+name: Regression
+
+on:
+  workflow_dispatch:
+    inputs:
+      services:
+        description: 'Choose a service to do regression against'
+        type: choice
+        options:
+          - Pet
+        required: false
+
+  repository_dispatch:
+
+
+jobs:
+  regression:
+    timeout-minutes: 40
+    strategy:
+      fail-fast: true
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: 18
+
+      - name: Cache dependencies
+        uses: actions/cache@v2
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-npm-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-npm-
+      
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run test scripts
+        run: npm test -- --grep ${{ inputs.services }}
+
+      - name: Upload test repor as artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: testReport_${{ matrix.browser }}
+          path: ${{ github.workspace }}/mochawesome-report/mochawesome.html
