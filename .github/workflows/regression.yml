@@ -46,7 +46,12 @@ jobs:
         run: npm install
 
       - name: Run test scripts
-        run: npm test -- --grep ${{ inputs.services }}
+        run: |
+          if [ ! -z ${{ inputs.services }} ];
+          then
+            npm test -- --grep ${{ inputs.services }}
+          else
+            npm test
 
       - name: Upload test repor as artifact
         uses: actions/upload-artifact@v3
