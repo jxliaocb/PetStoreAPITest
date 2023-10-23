@@ -1,6 +1,7 @@
 name: Regression
 
 on:
+  # Manually run
   workflow_dispatch:
     inputs:
       services:
@@ -10,7 +11,12 @@ on:
           - Pet
         required: false
 
+  # Reserve the ability to do regression by receiving external event like from webhook
   repository_dispatch:
+
+  # Daily regression
+  schedule:
+    - cron: '0 21 * * *' # run at UTC 09:00 PM every day (Sydney 07:00 AM).
 
 
 jobs:
@@ -45,5 +51,5 @@ jobs:
       - name: Upload test repor as artifact
         uses: actions/upload-artifact@v3
         with:
-          name: testReport_${{ matrix.browser }}
-          path: ${{ github.workspace }}/mochawesome-report/mochawesome.html
+          name: testReport for ${{ inputs.services }}
+          path: ${{ github.workspace }}/mochawesome-report
