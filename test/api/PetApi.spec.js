@@ -25,7 +25,7 @@ let petApiInstance;
 
 
 describe('(package)', function() {
-  describe('PetApi', function() {
+  describe('@Pet', function() {
     before('Setup api-key and apiCLient instance', function() {
       let apiClientInstance = new SwaggerPetstore.ApiClient();
       apiClientInstance.authentications['api_key'].apiKey = process.env.API_KEY || 'special-key';

@@ -1,10 +1,20 @@
+<div align="center">
+
+## Pet Store Automation tests
+
+_Automated tests for [Pet Store](https://github.com/jurgenting/petStoreAPITest)_
+
+[![regression 💯 ](https://github.com/jurgenting/petStoreAPITest/actions/workflows/regression.yml/badge.svg)](https://github.com/deltatre-vxp/axis-test-presentation-manager/actions/workflows/regression.yml)
+
+</div>
+
 # swagger_petstore
 
-Automation framework for petStore. Containing several test cases for pet API endpoints
+Automation framework for petStore.
 
 ## Installation
 
-### For [Node.js](https://nodejs.org/)
+### Install Node
 
 ### Install dependencies
 
@@ -18,9 +28,13 @@ npm install
 npm test -- --spec ./test/api/PetApi.spec.js
 ```
 
+## Run Pet test in Github workflow
+
+Go to Github actions tab, choose 'regression' workflow, click 'Run workflow' button.
+
 
 ## api_key
 
-change your key in .env file
+In case api key updated, update it in '.env' file in root dir of this code base.
 
 
