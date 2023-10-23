@@ -37,8 +37,11 @@ npm test -- --spec ./test/api/PetApi.spec.js
 
 ## Test report
 
-Find test report in Github artifact. Or in your local code repo's 'mochaawesome-report' folder if you ran you test locally.
+### Find test report in Github artifact. Or in your local code repo's 'mochaawesome-report' folder if you ran you test locally.
 ![Alt Text](./testReport.png)
+
+### Example test report
+![Alt Text](./exampleTestReport.png)
 
 ## api_key
 
