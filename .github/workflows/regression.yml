@@ -52,6 +52,7 @@ jobs:
             npm test -- --grep ${{ inputs.services }}
           else
             npm test
+          fi
 
       - name: Upload test repor as artifact
         uses: actions/upload-artifact@v3
