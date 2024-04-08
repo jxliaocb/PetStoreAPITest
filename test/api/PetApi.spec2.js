@@ -17,7 +17,7 @@
 
 import * as SwaggerPetstore from '../../src/index.js'
 import { expect } from 'chai'
-import * as petMetadata from '../../testData/petMetadata.json'
+import * as petMetadata from '../../testData/petMetadata2.json'
 import * as PetAction from '../../test/actions/pet/petAction.js'
 
 'use strict';

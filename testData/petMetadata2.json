@@ -1,23 +1,23 @@
 {
-    "petName": "testDog",
+    "petName": "testDog2",
     "category": {
-        "id": 1,
+        "id": 2,
         "name": "testCategory"
     },
     "tags": [{
-        "id": 1,
+        "id": 2,
         "name": "testTag"
     }],
     "photoUrls": ["https://www.akc.org/wp-content/uploads/2021/09/Finnish-Lapphund-shutterstock_1038964219.jpg"],
     "status": "available",
-    "petNameNew": "testDogNew",
+    "petNameNew": "testDog2",
     "photoUrlsNew": ["https://www.akc.org/wp-content/uploads/2021/09/Finnish-Lapphund-shutterstock_1038964220.jpg"],
     "statusSold": "sold",
     "statusPending": "pending",
     "tagsNew": [{
-        "id": 1,
+        "id": 2,
         "name": "testTagNew"
     }],
     "additionalMetadata": "the another image",
-    "local2ndImagePath": "../../../testData/puppyImage.jpeg"
+    "local2ndImagePath": "../../../testData/puppyImage2.jpeg"
 }
