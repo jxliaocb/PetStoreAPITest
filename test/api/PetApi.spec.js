@@ -18,6 +18,7 @@
 import * as SwaggerPetstore from '../../src/index.js'
 import { expect } from 'chai'
 import * as petMetadata from '../../testData/petMetadata.json'
+import * as PetAction from '../../test/actions/pet/petAction';
 
 'use strict';
 
@@ -34,13 +35,13 @@ describe('(package)', function() {
     describe('add a new pet to the store', async function() {
       let petContext = {};
       it.only('should call addPet successfully', async function() {
-        const resp = await SwaggerPetstore.petAction.createAPet(petApiInstance, 
-                                                              petMetadata.petName, 
+        const resp = await PetAction.createAPet(petApiInstance,
+                                                              petMetadata.petName,
                                                               petMetadata.photoUrls,
                                                               petMetadata.category,
                                                               petMetadata.tags,
                                                               petMetadata.status);
-        
+
         petContext.petID = resp.body.id;
 
         expect(resp.statusCode).to.equal(200);
@@ -49,10 +50,10 @@ describe('(package)', function() {
         expect(resp.body.photoUrls).to.deep.equal(petMetadata.photoUrls);
         expect(resp.body.category).to.deep.equal(petMetadata.category);
         expect(resp.body.tags).to.deep.equal(petMetadata.tags);
-        
+
       });
       after('clean up test data(remove the added pet)', async function() {
-        const resp = await SwaggerPetstore.petAction.deleteAPet(petApiInstance, petContext.petID);
+        const resp = await PetAction.deleteAPet(petApiInstance, petContext.petID);
 
         expect(resp.statusCode).to.equal(200);
       })
@@ -61,17 +62,17 @@ describe('(package)', function() {
       let petContext = {};
 
       before('setup test data(add a new pet to the store)', async function() {
-        const resp = await SwaggerPetstore.petAction.createAPet(petApiInstance, 
-          petMetadata.petName, 
+        const resp = await PetAction.createAPet(petApiInstance,
+          petMetadata.petName,
           petMetadata.photoUrls,
           petMetadata.category,
           petMetadata.tags,
           petMetadata.status);
-        
+
         petContext.petID = resp.body.id;
 
       });
-      
+
       it.only('filter a pet by its status', async function() {
         let resp;
 
@@ -90,7 +91,7 @@ describe('(package)', function() {
         expect(filteredPet.photoUrls).to.deep.equal(petMetadata.photoUrls);
         expect(filteredPet.category).to.deep.equal(petMetadata.category);
         expect(filteredPet.tags).to.deep.equal(petMetadata.tags);
-        
+
       });
       it.only('find a pet by its ID', async function() {
         let resp;
@@ -101,19 +102,19 @@ describe('(package)', function() {
           console.error(err);
           throw new Error(err);
         }
-      
+
         expect(resp.statusCode).to.equal(200);
         expect(resp.body.id).is.a('number');
         expect(resp.body.name).to.equal(petMetadata.petName);
         expect(resp.body.photoUrls).to.deep.equal(petMetadata.photoUrls);
         expect(resp.body.category).to.deep.equal(petMetadata.category);
         expect(resp.body.tags).to.deep.equal(petMetadata.tags);
-        
+
       });
       it.only('upload an image to the pet', async function() {
         let resp;
         let opts = {additionalMetadata: petMetadata.additionalMetadata};
-        const imageBlob = SwaggerPetstore.petAction.createAnImageBlob(petMetadata.local2ndImagePath);
+        const imageBlob = PetAction.createAnImageBlob(petMetadata.local2ndImagePath);
         opts.file = imageBlob;
 
         try{
@@ -124,11 +125,11 @@ describe('(package)', function() {
         }
 
         const regexPattern = new RegExp(`additionalMetadata: ${petMetadata.additionalMetadata}\\nFile uploaded to`);
-      
+
         expect(resp.statusCode).to.equal(200);
         expect(resp.body.type).to.equal('unknown');
         expect(regexPattern.test(resp.body.message)).to.be.true;
-        
+
       });
       it.only('update a pet with form data', async function() {
         let resp;
@@ -140,7 +141,7 @@ describe('(package)', function() {
           console.error(err);
           throw new Error(err);
         }
-      
+
         expect(resp.statusCode).to.equal(200);
         expect(resp.body.code).to.equal(200);
         expect(parseInt(resp.body.message)).to.equal(petContext.petID);
@@ -151,48 +152,48 @@ describe('(package)', function() {
           console.error(err);
           throw new Error(err);
         }
-      
-        expect(resp.statusCode).to.equal(200);
-        expect(resp.body.name).to.equal(petMetadata.petNameNew);
-        expect(resp.body.status).to.equal(petMetadata.statusPending);
-        
-      });
-      it.only('update name of the pet', async function() {
-        let body = new SwaggerPetstore.Pet(petMetadata.petNameNew, petMetadata.photoUrls);
-        const resp = await SwaggerPetstore.petAction.updateAPet(petApiInstance, body);
 
         expect(resp.statusCode).to.equal(200);
         expect(resp.body.name).to.equal(petMetadata.petNameNew);
-        
+        expect(resp.body.status).to.equal(petMetadata.statusPending);
+
+      });
+      it.only('update name of the pet', async function() {
+        let body = new SwaggerPetstore.Pet(petMetadata.petNameNew, petMetadata.photoUrls);
+        const resp = await PetAction.updateAPet(petApiInstance, body);
+
+        expect(resp.statusCode).to.equal(200);
+        expect(resp.body.name).to.equal(petMetadata.petNameNew);
+
       });
       it.only('update status of the pet to sold', async function() {
         let body = new SwaggerPetstore.Pet(petMetadata.petName, petMetadata.photoUrls);
         body.status = petMetadata.statusSold;
-        const resp = await SwaggerPetstore.petAction.updateAPet(petApiInstance, body);
+        const resp = await PetAction.updateAPet(petApiInstance, body);
 
         expect(resp.statusCode).to.equal(200);
         expect(resp.body.status).to.equal(petMetadata.statusSold);
-        
+
       });
       it.only('update photoUrls of the pet', async function() {
         let body = new SwaggerPetstore.Pet(petMetadata.petName, petMetadata.photoUrlsNew);
-        const resp = await SwaggerPetstore.petAction.updateAPet(petApiInstance, body);
+        const resp = await PetAction.updateAPet(petApiInstance, body);
 
         expect(resp.statusCode).to.equal(200);
         expect(resp.body.photoUrls).to.deep.equal(petMetadata.photoUrlsNew);
-        
+
       });
       it.only('update tags of the pet', async function() {
         let body = new SwaggerPetstore.Pet(petMetadata.petName, petMetadata.photoUrls);
         body.tags = petMetadata.tagsNew;
-        const resp = await SwaggerPetstore.petAction.updateAPet(petApiInstance, body);
+        const resp = await PetAction.updateAPet(petApiInstance, body);
 
         expect(resp.statusCode).to.equal(200);
         expect(resp.body.tags).to.deep.equal(petMetadata.tagsNew);
-        
+
       });
       after('clean up test data(delete the pet from the store)', async function() {
-        const resp = await SwaggerPetstore.petAction.deleteAPet(petApiInstance, petContext.petID);
+        const resp = await PetAction.deleteAPet(petApiInstance, petContext.petID);
 
         expect(resp.statusCode).to.equal(200);
 
@@ -202,8 +203,8 @@ describe('(package)', function() {
     describe('delete a pet from the store', async function() {
       let petContext = {};
       before('setup test data(add a new pet to the store)', async function() {
-        let resp = await SwaggerPetstore.petAction.createAPet(petApiInstance, 
-                                                              petMetadata.petName, 
+        let resp = await PetAction.createAPet(petApiInstance,
+                                                              petMetadata.petName,
                                                               petMetadata.photoUrls,
                                                               petMetadata.category,
                                                               petMetadata.tags);
@@ -211,7 +212,7 @@ describe('(package)', function() {
         petContext.petID = resp.body.id;
       });
       it.only('delete an existing pet', async function() {
-        let resp = await SwaggerPetstore.petAction.deleteAPet(petApiInstance, petContext.petID);
+        let resp = await PetAction.deleteAPet(petApiInstance, petContext.petID);
 
         expect(resp.statusCode).to.equal(200);
       });

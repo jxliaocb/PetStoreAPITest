@@ -17,15 +17,13 @@ import {ApiClient} from './ApiClient';
 import {ApiResponse} from './model/ApiResponse';
 import {Pet} from './model/Pet';
 import {PetApi} from './api/PetApi';
-import * as petAction from '../test/actions/pet/petAction';
 import { config } from 'dotenv';
 
 export {
     ApiClient,
     ApiResponse,
     Pet,
-    PetApi,
-    petAction
+    PetApi
 };
 
 config();
