@@ -5,7 +5,7 @@
   "license": "Apache 2.0",
   "main": "src/index.js",
   "scripts": {
-    "test": "mocha --require @babel/register --recursive --timeout 120000 --reporter mochawesome"
+    "test": "mocha --require @babel/register --recursive --timeout 120000 --reporter mochawesome --parallel"
   },
   "browser": {
     "fs": false
